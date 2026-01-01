@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Happy 24 🎈</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div id="party-layer"></div>
+<div id="sky"></div>
+<div id="flash"></div>
+<div class="tap-hint">Klik balon sampai 24 🎈</div>
+
+<div id="snow"></div>
+
+<audio id="bgMusic" src="backsound.mp3" loop></audio>
+<audio id="popMusic" src="pop.mp3" preload="auto"></audio>
+
+<!-- POPUP -->
+<div id="birthdayPopup">
+  <div class="popup-card">
+    <h1>Selamat Bertambah Usia</h1>
+    <h2>Yang ke <span>24</span> Tahun</h2>
+    <p>Sayangnya Akuuuu 🤍</p>
+    <button onclick="goNext()">Peluk Virtual 🤍</button>
+  </div>
+</div>
+
+<div class="page-transition" id="pageTransition"></div>
+
+<script>
+const sky = document.getElementById("sky");
+const flash = document.getElementById("flash");
+const popup = document.getElementById("birthdayPopup");
+const transition = document.getElementById("pageTransition");
+
+const bgMusic = document.getElementById("bgMusic");
+const popMusic = document.getElementById("popMusic");
+
+bgMusic.volume = 0.5;
+popMusic.volume = 0.9;
+
+let number = 1;
+const MAX = 24;
+let musicStarted = false;
+
+/* 🔓 UNLOCK AUDIO (WAJIB AGAR SEMUA BALON BUNYI) */
+let audioUnlocked = false;
+
+document.addEventListener("pointerdown", () => {
+  if (bgStarted) return;
+  bgStarted = true;
+
+  [bgMusic, popMusic].forEach(a => {
+    a.muted = false;
+    a.volume = 1;
+    a.play().then(() => {
+      a.pause();
+      a.currentTime = 0;
+    });
+  });
+}, { once: true });
+function playPop() {
+  const pop = new Audio("pop.mp3");
+  pop.volume = 1;
+  pop.play().catch(()=>{});
+}
+
+/* 🎈 SPAWN BALON */
+function spawnBalloon() {
+  if (number > MAX) return;
+
+  const balloon = document.createElement("div");
+  balloon.className = "balloon";
+  balloon.style.left = Math.random() * 80 + "vw";
+  balloon.innerHTML = `<span>${number}</span>🎈`;
+
+  balloon.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    /* ▶️ BACKSOUND DIMULAI SAAT KLIK PERTAMA */
+    if (!musicStarted) {
+      bgMusic.play();
+      musicStarted = true;
+    }
+
+    /* 🔊 SUARA POP — PASTI BUNYI */
+    
+    const pop = popMusic.cloneNode();
+    pop.volume = 0.9;
+    pop.play();
+
+    explode(balloon);
+    balloon.remove();
+
+    /* 🎯 JIKA BALON KE-24 */
+    if (number === MAX) {
+      setTimeout(() => {
+        popup.classList.add("show");
+      }, 300);
+      return;
+    }
+
+    number++;
+    setTimeout(spawnBalloon, 200);
+  });
+
+  sky.appendChild(balloon);
+}
+
+/* 💥 EFEK PETASAN */
+function explode(el) {
+  const r = el.getBoundingClientRect();
+
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement("div");
+    p.className = "firework";
+    p.style.left = r.left + r.width / 2 + "px";
+    p.style.top = r.top + r.height / 2 + "px";
+    p.style.background = `hsl(${Math.random() * 360},100%,70%)`;
+    p.style.setProperty("--x", (Math.random() * 360 - 180) + "px");
+    p.style.setProperty("--y", (Math.random() * 360 - 180) + "px");
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+  }
+
+  flash.classList.add("active");
+  setTimeout(() => flash.classList.remove("active"), 150);
+}
+
+/* 🎆 PETASAN OTOMATIS */
+setInterval(() => {
+  const fake = {
+    getBoundingClientRect() {
+      return {
+        left: Math.random() * window.innerWidth,
+        top: Math.random() * window.innerHeight / 2,
+        width: 0,
+        height: 0
+      };
+    }
+  };
+  explode(fake);
+}, 3000);
+
+/* BINTANG JATUH */
+setInterval(()=>{
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*50+"vw";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),1200);
+},4000);
+const snowContainer = document.getElementById("snow");
+
+function createSnow() {
+  const snow = document.createElement("div");
+  snow.className = "snowflake";
+  snow.innerHTML = ["❄️","✨","🤍","💖","💫","🌟"][Math.floor(Math.random() * 6)];
+
+  snow.style.left = Math.random() * window.innerWidth + "px";
+  snow.style.fontSize = Math.random() * 18 + 10 + "px";
+  snow.style.animationDuration = Math.random() * 5 + 5 + "s";
+  snow.style.opacity = Math.random();
+
+  snowContainer.appendChild(snow);
+
+  setTimeout(() => snow.remove(), 10000);
+}
+
+setInterval(createSnow, 200);
+const partnerName = "Denis Louis Luhukay"; // GANTI NAMA DI SINI ❤️
+
+setInterval(()=>{
+    const name = document.createElement('div');
+    name.className = 'love-name';
+    name.innerText = partnerName;
+
+    name.style.left = Math.random()*80 + 10 + 'vw';
+    name.style.animationDuration = 7 + Math.random()*4 + 's';
+
+    document.getElementById('party-layer').appendChild(name);
+
+    setTimeout(()=>name.remove(),12000);
+},1200);
+function birthdayFireworks(age = 24){
+    const layer = document.getElementById('party-layer');
+
+    for(let round = 0; round < age; round++){
+        setTimeout(()=>{
+            for(let i=0;i<10;i++){
+                const f = document.createElement('div');
+                f.className = 'fire-dot';
+
+                f.style.left = '50vw';
+                f.style.top  = '45vh';
+
+                f.style.setProperty('--x',(Math.random()*240-120)+'px');
+                f.style.setProperty('--y',(Math.random()*240-120)+'px');
+
+                layer.appendChild(f);
+                setTimeout(()=>f.remove(),1500);
+            }
+        }, round * 100); // jarak antar petasan
+    }
+}
+
+
+/* ➡️ PINDAH KE WEBSITE SELANJUTNYA */
+function goNext() {
+  popup.classList.remove("show");
+  transition.classList.add("active");
+
+  setTimeout(() => {
+    window.location.href = "../cinta/index.html";
+  }, 1200);
+}
+
+/* 🚀 MULAI */
+spawnBalloon();
+</script>
+</body>
+</html>

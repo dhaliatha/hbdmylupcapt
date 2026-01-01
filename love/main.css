@@ -1,0 +1,843 @@
+@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Bilbo+Swash+Caps&family=Inter:opsz,wght@14..32,500&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  #soft-title{
+    position:fixed;
+    top:28px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:'Pacifico', cursive;
+    font-size:22px;
+    color:#0770b0;
+    opacity:.65;
+    letter-spacing:1px;
+    z-index:30;
+}
+  html,
+  body {
+    height: 100%;
+    /* for touch screen */
+    touch-action: none; 
+  }
+  
+  body {
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-family: "Pacifico", sans-serif;
+    background: #ffffff;
+    -webkit-perspective: 1000px;
+            perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+  }
+  
+  #drag-container, #spin-container {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: auto;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transform: rotateX(-10deg);
+            transform: rotateX(-10deg);
+            z-index: 100;
+  }
+  
+  #drag-container img, #drag-container video {
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 120%;
+    max-height: 120%; 
+    line-height: 200px;
+    font-size: 50px;
+    text-align: center;
+    -webkit-box-shadow: 0 0 8px #fff;
+            box-shadow: 0 0 8px #fff;
+    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0005);
+  }
+  
+  #drag-container img:hover, #drag-container video:hover {
+    -webkit-box-shadow: 0 0 15px #fffd;
+            box-shadow: 0 0 15px #fffd;
+    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0007);
+  }
+  
+  #drag-container p {
+    
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%) rotateX(90deg);
+            transform: translate(-50%,-50%) rotateX(90deg);
+    color: rgb(20, 60, 139);
+    animation: fadein ease 15s;
+  }
+
+  @keyframes fadein {
+      from {
+          opacity:0;
+          
+      }
+      to {
+          opacity: 1;
+          
+      }
+  }
+  
+  #ground {
+    width: 900px;
+    height: 900px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%) rotateX(90deg);
+            transform: translate(-50%,-50%) rotateX(90deg);
+    background: -webkit-radial-gradient(center center, farthest-side , #9993, transparent);
+  }
+  
+  #music-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  
+  @-webkit-keyframes spin {
+    from{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    } to{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    from{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    } to{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  @-webkit-keyframes spinRevert {
+    from{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    } to{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    }
+  }
+  @keyframes spinRevert {
+    from{
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    } to{
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    }
+  }
+
+  #canvas {
+    background-color:transparent;   
+    color: transparent; 
+    margin: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 100vw;
+  }
+
+
+#canva {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    overflow: hidden;
+}
+
+p {
+    font-weight: 600;
+    font-size: 4vw;
+    text-align: center;
+    
+}
+
+@media screen and (max-width: 658px)    {
+  p {
+    font-weight: 600;
+    font-size: 12vw;
+    text-align: center;
+}
+}
+/* =============================
+   BY DHALIATHA TEXT (GERAK HALUS)
+============================= */
+#byText{
+    position:fixed;
+    bottom:85px; /* di atas open card */
+    left:50%;
+    transform:translateX(-50%);
+    font-family:'Pacifico', cursive;
+    font-size:20px;
+    color:#59bbf8;
+    letter-spacing:1.2px;
+
+    animation:floatText 3.5s ease-in-out infinite;
+    z-index:9998;
+    pointer-events:none;
+}
+
+/* Gerak naik turun lembut */
+@keyframes floatText{
+    0%{
+        transform:translate(-50%, 0);
+        opacity:0.7;
+    }
+    50%{
+        transform:translate(-50%, -8px);
+        opacity:1;
+    }
+    100%{
+        transform:translate(-50%, 0);
+        opacity:0.7;
+    }
+}
+
+
+/* =============================
+   OPEN CARD BUTTON (DENYUT)
+============================= */
+#openCard{ 
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:14px 36px;
+    border-radius:30px;
+
+    background:linear-gradient(45deg,#163279,#59bbf8);
+    color:#fff;
+
+    font-family:'Dancing Script', cursive;
+    font-size:18px;
+    font-weight:400;
+    border:none;
+    cursor:pointer;
+
+    z-index:9998;
+
+    animation:pulseSoft 2.2s ease-in-out infinite;
+    transition:.25s ease;
+}
+
+/* hover lembut */
+#openCard:hover{
+    transform:translateX(-50%) scale(1.05);
+    box-shadow:0 10px 25px rgba(117, 152, 255, 0.877);
+}
+
+/* =============================
+   SAAT DI KLIK
+============================= */
+#openCard:active{
+    background:linear-gradient(45deg,#2a2b68,#59bbf8);
+    transform:translateX(-50%) scale(0.94);
+    box-shadow:0 0 25px rgba(117, 177, 255, 0.9);
+}
+
+/* =============================
+   ANIMASI DENYUT
+============================= */
+@keyframes pulseSoft{
+    0%{
+        box-shadow:0 0 0 0 rgba(130, 180, 255, 0.804);
+    }
+    50%{
+        box-shadow:0 0 0 14px rgba(255,117,143,0);
+    }
+    100%{
+        box-shadow:0 0 0 0 rgba(255,117,143,0);
+    }
+}
+
+
+/* =============================
+   POPUP CARD (JATUH DARI ATAS)
+============================= */
+#popup{
+    position:fixed;
+    top:-500px;              /* mulai dari atas */
+    right:20px;
+    opacity:0;
+    z-index:900;
+    pointer-events:none;
+}
+
+#popup.show{
+    animation:dropDown 1.1s ease forwards;
+    pointer-events:auto;
+}
+
+@keyframes dropDown{
+    0%{
+        top:-500px;
+        opacity:0;
+    }
+    70%{
+        top:120px;
+        opacity:1;
+    }
+    100%{
+        top:140px;
+        opacity:1;
+    }
+}
+
+/* =============================
+   BOOK (PROPORSIONAL)
+============================= */
+.book{
+    width:420px;
+    height:300px;
+    display:flex;
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 25px 55px rgba(130, 180, 255, 0.804);
+}
+
+/* =============================
+   PAGE
+============================= */
+.page{
+    width:50%;
+    padding:26px;
+    box-sizing:border-box;
+}
+
+/* =============================
+   HALAMAN KIRI (TEKS + SCROLL)
+============================= */
+.page.left{
+    background:#fff0f5;
+    font-family:'Pacifico', cursive;
+    color:#444;
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* JUDUL */
+.page.left h2{
+    font-family:'Bilbo Swash Caps', cursive;
+    font-size:32px;
+    color:#59bbf8;
+    margin-bottom:12px;
+}
+
+/* AREA TEKS SCROLL */
+#typing{
+    font-size:17px;
+    line-height:1.85;
+    overflow-y:auto;
+    max-height:190px;   /* SCROLL AKTIF */
+    padding-right:6px;
+    white-space:pre-line;
+}
+
+/* SCROLLBAR CANTIK */
+#typing::-webkit-scrollbar{
+    width:5px;
+}
+#typing::-webkit-scrollbar-thumb{
+    background:#86d0ff;
+    border-radius:10px;
+}
+
+/* =============================
+   HALAMAN KANAN (FOTO)
+============================= */
+.page.right{
+    background:linear-gradient(to right,#fff,#fff6f9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* FOTO KARTU */
+.photoCard{
+    width:85%;
+    max-height:85%;
+    object-fit:cover;
+    border-radius:16px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+    opacity:0;
+    transform:translateY(20px) scale(.95);
+    transition:1s ease;
+}
+
+/* SAAT CARD DIBUKA */
+#popup.show .photoCard{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+/* =============================
+   HALAMAN KANAN (SLIDESHOW)
+============================= */
+.page.right{
+    background:linear-gradient(to right,#fff,#fff6f9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* WRAPPER FOTO */
+.photo-wrapper{
+    width:88%;
+    height:85%;
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+
+/* FOTO SLIDE */
+.slide{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+    transition:1.2s ease;
+}
+
+/* FOTO AKTIF */
+.slide.active{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+/* MUNCUL SAAT CARD DIBUKA */
+#popup.show .slide.active{
+    opacity:1;
+}
+/* =============================
+   HALAMAN KIRI - SURAT
+============================= */
+.page.left{
+    background:#fffdf8;
+    color:#333;
+    font-size:14.5px;
+    line-height:1.8;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    padding:0; /* biar wrapper ngatur */
+}
+/* =============================
+   ISI SURAT / LETTER
+============================= */
+.letter{
+    width:100%;
+    height:100%;
+    padding:22px 24px;     /* ⬅️ kertas jadi lega */
+    box-sizing:border-box;
+
+    font-family:'Amita', cursive;  /* ⬅️ FONT UTAMA SURAT */
+    font-size:16px;
+    line-height:1.0;
+
+    text-align:left;
+    color:#333;
+
+    overflow-y:auto;
+}
+
+/* teks ketik */
+#typingText{
+    display:block;
+    font-weight:400;   /* ⬅️ NORMAL */
+    white-space:pre-wrap;
+    text-align:left;
+    font-family:'Amita', cursive;
+    letter-spacing:.3px;
+}
+
+/* =============================
+   BUTTON TETAP TENGAH
+============================= */
+#nextPageBtn{
+    display:block;
+    margin:22px auto 8px auto; /* tengah tombol */
+}
+
+
+/* SCROLL HALUS */
+.letter::-webkit-scrollbar{
+    width:5px;
+}
+.letter::-webkit-scrollbar-thumb{
+    background:#76cafe;
+    border-radius:10px;
+}
+/* =============================
+   BUTTON DI DALAM SURAT
+============================= */
+#nextPageBtn{
+    display:inline-block;
+    margin:18px auto 6px auto; /* tengah & jarak bawah */
+    padding:8px 18px;
+
+    background:linear-gradient(45deg,#2a2b68,#59bbf8);
+    color:#fff;
+    border:none;
+    border-radius:18px;
+
+    font-size:13px;
+    font-family:'Dancing Script', cursive;
+    font-weight:400;
+    cursor:pointer;
+
+    box-shadow:0 6px 14px rgba(130, 180, 255, 0.804);
+    transition:.25s ease;
+}
+
+#nextPageBtn:hover{
+    transform:translateY(-1px) scale(1.03);
+    box-shadow:0 10px 22px rgba(130, 180, 255, 0.804);
+}
+/* =============================
+   CONFETTI FIX TOTAL
+============================= */
+#confetti-wrapper{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    pointer-events:none;
+
+    z-index:1200; /* PALING AMAN, di atas ground & container */
+}
+
+.confetti{
+    position:absolute;
+    top:-20px;
+    width:8px;
+    height:14px;
+    opacity:0.9;
+    animation:confettiFall linear forwards;
+    border-radius:2px;
+}
+
+.confetti.pink{ background:#ff6f91; }
+.confetti.yellow{ background:#ffc75f; }
+.confetti.purple{ background:#845ec2; }
+.confetti.blue{ background:#4dd0e1; }
+
+@keyframes confettiFall{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+    to{
+        transform:translateY(120vh) rotate(720deg);
+        opacity:0;
+    }
+}
+/* =============================
+   CONFETTI AUTO JATUH
+============================= */
+#confetti-auto{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    pointer-events:none;
+    z-index:800; /* di atas body, di bawah popup */
+}
+
+.auto-confetti{
+    position:absolute;
+    top:-15px;
+    width:6px;
+    height:10px;
+    opacity:.8;
+    border-radius:2px;
+    animation:autoFall linear forwards;
+}
+
+.auto-confetti.pink{background:#ff6f91;}
+.auto-confetti.gold{background:#ffc75f;}
+.auto-confetti.blue{background:#4dd0e1;}
+.auto-confetti.purple{background:#845ec2;}
+
+@keyframes autoFall{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:.9;
+    }
+    to{
+        transform:translateY(120vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* ❤️ LOVE CONFETTI */
+.love-confetti{
+    position:absolute;
+    top:-20px;
+    font-size:14px;
+    color:#ff6f91;
+    animation:loveFall linear forwards;
+}
+
+@keyframes loveFall{
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translateY(120vh) scale(.7);
+        opacity:0;
+    }
+}
+/* =============================
+   PARTY FX LAYER
+============================= */
+#party-layer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2000;
+}
+
+/* 💗 LOVE GLOW */
+.love-glow{
+    position:absolute;
+    font-size:16px;
+    color:#ff6f91;
+    text-shadow:0 0 10px rgba(255,111,145,.8);
+    animation:loveFloat linear forwards;
+}
+
+@keyframes loveFloat{
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translateY(120vh) scale(.6);
+        opacity:0;
+    }
+}
+
+/* 🎊 CONFETTI PARTY */
+.party-confetti{
+    position:absolute;
+    width:7px;
+    height:12px;
+    border-radius:2px;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translateY(120vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* ✨ SPARKLE */
+.sparkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 10px white;
+    animation:sparkle 3s ease-out forwards;
+}
+
+@keyframes sparkle{
+    to{opacity:0;transform:scale(2)}
+}
+
+/* 🎈 BALLOON */
+.balloon{
+    position:absolute;
+    width:20px;
+    height:26px;
+    background:radial-gradient(circle at 30% 30%, #fff, #55b6f3);
+    border-radius:50%;
+    animation:balloonUp linear forwards;
+}
+
+@keyframes balloonUp{
+    to{
+        transform:translateY(-130vh);
+        opacity:0;
+    }
+}
+
+/* 🎆 PETASAN RINGAN */
+.fire-dot{
+    position:absolute;
+    width:5px;
+    height:5px;
+    background:#ffd166;
+    border-radius:50%;
+    animation:fireBurst 1.2s ease-out forwards;
+}
+
+@keyframes fireBurst{
+    to{
+        transform:translate(var(--x),var(--y)) scale(0);
+        opacity:0;
+    }
+}
+
+/* =============================
+   PARTY FX LAYER
+============================= */
+#party-layer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2000;
+}
+
+/* 💗 LOVE GLOW */
+.love-glow{
+    position:absolute;
+    font-size:16px;
+    color:#ff6f91;
+    text-shadow:0 0 10px rgba(255,111,145,.8);
+    animation:loveFloat linear forwards;
+}
+
+@keyframes loveFloat{
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translateY(120vh) scale(.6);
+        opacity:0;
+    }
+}
+
+/* ✨ SPARKLE */
+.sparkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 10px white;
+    animation:sparkle 3s ease-out forwards;
+}
+
+@keyframes sparkle{
+    to{opacity:0;transform:scale(2)}
+}
+
+/* 🎈 BALLOON */
+.balloon{
+    position:absolute;
+    width:20px;
+    height:26px;
+    background:radial-gradient(circle at 30% 30%, #fff, #55b6f3);
+    border-radius:50%;
+    animation:balloonUp linear forwards;
+}
+
+@keyframes balloonUp{
+    to{
+        transform:translateY(-130vh);
+        opacity:0;
+    }
+}
+
+/* 🎆 PETASAN RINGAN */
+.fire-dot{
+    position:absolute;
+    width:5px;
+    height:5px;
+    background:#ffd166;
+    border-radius:50%;
+    animation:fireBurst 1.2s ease-out forwards;
+}
+
+@keyframes fireBurst{
+    to{
+        transform:translate(var(--x),var(--y)) scale(0);
+        opacity:0;
+    }
+}
+/* =============================
+   CLOSE BUTTON (X)
+============================= */
+#closeCard{
+    position:absolute;
+    top:10px;
+    right:14px;
+
+    width:34px;
+    height:34px;
+    border-radius:50%;
+
+    background:rgba(130, 180, 255, 0.468);
+    border:none;
+    color:#55b6f3;
+
+    font-size:20px;
+    font-weight:400;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.3s ease;
+    z-index:10000;
+}
+
+#closeCard:hover{
+    background:#55b6f3;
+    color:#fff;
+    transform:rotate(90deg) scale(1.1);
+}
+@keyframes slideUp{
+    from{
+        opacity:1;
+        top:140px;
+    }
+    to{
+        opacity:0;
+        top:-500px;
+    }
+}
+
+#popup.hide{
+    animation:slideUp .9s ease forwards;
+}
+

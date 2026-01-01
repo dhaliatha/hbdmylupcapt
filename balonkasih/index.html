@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Happy 24 🎈</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- AUDIO -->
+<audio id="bgMusic" src="audio/bg.mp3" loop></audio>
+<audio id="popSound" src="pop.mp3"></audio>
+
+<div id="sky"></div>
+<div id="balloon-container"></div>
+
+<!-- POPUP -->
+<div id="popup">
+  <div class="popup-box">
+    <h1>🎉 Selamat Bertambah Umur ke-24 🎉</h1>
+    <p>Semoga semua harapanmu tumbuh seterang langit malam ✨</p>
+    <button id="nextBtn">Lanjut</button>
+  </div>
+</div>
+
+<script>
+/* =====================
+   VARIABEL
+===================== */
+const container = document.getElementById("balloon-container");
+const popSound = document.getElementById("popSound");
+const bgMusic = document.getElementById("bgMusic");
+const popup = document.getElementById("popup");
+const nextBtn = document.getElementById("nextBtn");
+
+let clickedCount = 0;
+
+/* =====================
+   MUSIK BACKGROUND
+===================== */
+document.body.addEventListener("click", () => {
+  bgMusic.play();
+}, { once: true });
+
+/* =====================
+   BUAT BALON
+===================== */
+function createBalloon(number) {
+  const balloon = document.createElement("div");
+  balloon.className = "balloon";
+  balloon.innerText = number;
+  balloon.style.left = Math.random() * 80 + "%";
+
+  balloon.addEventListener("click", () => {
+    popSound.currentTime = 0;
+    popSound.play();
+    explode(balloon);
+    balloon.remove();
+    clickedCount++;
+
+    if (clickedCount === 24) {
+      setTimeout(() => {
+        popup.style.display = "flex";
+      }, 1000);
+    }
+  });
+
+  container.appendChild(balloon);
+}
+
+/* =====================
+   LEDAKAN PETASAN
+===================== */
+function explode(balloon) {
+  const boom = document.createElement("div");
+  boom.className = "explosion";
+  boom.style.left = balloon.offsetLeft + "px";
+  boom.style.top = balloon.offsetTop + "px";
+  document.body.appendChild(boom);
+
+  setTimeout(() => boom.remove(), 600);
+}
+
+/* =====================
+   BALON MUNCUL GANTIAN
+===================== */
+let i = 1;
+const balloonInterval = setInterval(() => {
+  createBalloon(i);
+  i++;
+  if (i > 24) clearInterval(balloonInterval);
+}, 900);
+
+/* =====================
+   CONFETTI OTOMATIS
+===================== */
+setInterval(() => {
+  const confetti = document.createElement("div");
+  confetti.className = "confetti";
+  confetti.style.left = Math.random() * 100 + "%";
+  confetti.style.background =
+    ["gold", "red", "cyan", "white"][Math.floor(Math.random() * 4)];
+  document.body.appendChild(confetti);
+
+  setTimeout(() => confetti.remove(), 3000);
+}, 150);
+
+/* =====================
+   TOMBOL LANJUT
+===================== */
+nextBtn.addEventListener("click", () => {
+  document.body.style.animation = "blink 0.2s 6";
+  setTimeout(() => {
+    window.location.href = "https://example.com";
+  }, 1200);
+});
+</script>
+
+</body>
+</html>

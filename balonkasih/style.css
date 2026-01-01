@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  overflow: hidden;
+  background: radial-gradient(circle at bottom, #0a1a3a, #020b1c);
+  height: 100vh;
+}
+
+/* Langit */
+#sky {
+  position: fixed;
+  inset: 0;
+  background: url("https://i.imgur.com/8Km9tLL.png") repeat;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* Balon */
+#balloon-container {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 70px;
+  height: 90px;
+  background: linear-gradient(#4da6ff, #003366);
+  border-radius: 50% 50% 50% 50%;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: float 8s linear forwards;
+  box-shadow: 0 0 15px rgba(0,150,255,.8);
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  width: 2px;
+  height: 25px;
+  background: white;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-120vh);
+  }
+}
+
+/* Ledakan */
+.explosion {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, gold, red, transparent);
+  border-radius: 50%;
+  animation: boom .6s ease-out forwards;
+}
+
+@keyframes boom {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Confetti petasan */
+.confetti {
+  position: absolute;
+  width: 6px;
+  height: 14px;
+  background: gold;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* Popup */
+#popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.popup-box {
+  background: #0a2a5a;
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  animation: slideDown 1s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+#nextBtn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #4da6ff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: .4; }
+}

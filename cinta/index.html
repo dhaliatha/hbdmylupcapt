@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5" name="viewport" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+
+  <!-- Update title and description for a birthday theme -->
+  <title>Selamat Ulang Tahun Yaaa Sayangnya aku 🩵</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon.png">
+  <meta name="description" content="A special birthday greeting" />
+</head>
+
+<body style="background: linear-gradient( oklab(48.638999999999996% -0.01408 -0.11236 / 0.961), lch(100% 0.01 296.81 / 0.878)), url(./LANGIT.svg);
+background-size: cover;
+background-position: center;
+    height: 100;">
+
+  <audio src="./music.mp3" id="linkmp3" class="sembunyi"></audio>
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+  <div id="bodyblur">
+    <!-- Wallpaper -->
+    <img src="" id="wallpaper" />
+  </div>
+  <div id="Content">
+    <div id="kadoIn">
+      <!-- Gift Button -->
+      <img src="./Valentine-Surprise.png" alt="Open Gift Ini Sayangku" />
+    </div>
+    <p id="ket">
+      <span style="font-style: italic; color: rgb(240, 240, 240); margin-top: 3px !important; ">Buka Hadiah Kecil Ini hehe</span>
+    </p>
+
+    <div class="kumpulanstiker" style="margin-top: 95px;">
+      <!-- Stickers for Content -->
+      <img src="https://media.tenor.com/4Ijycn6xFzUAAAAj/mochi-blue-roses.gif" id="fotostiker" />
+      <img src="https://feeldreams.github.io/bunga.gif" id="fotostiker1" />
+      <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker2" />
+      <img src="https://media.tenor.com/snFoLI-S9CQAAAAj/milk-and-mocha.gif" id="fotostiker3" />
+      <img src="https://feeldreams.github.io/emawh.gif" id="fotostiker4" />
+      <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker5" />
+    </div>
+
+    <p id="halo" class="halo"></p>
+
+    <div>
+      <blockquote id="bq" data-text="💞">
+        <!-- Update the messages for a birthday greeting -->
+        <p id="kalimat">
+          Haiii Selamat Ulang Tahunn , Gantenggggku! Yeyy Hari Ini ulang Tahun YEYEYYY CIYEE TUA.
+        </p>
+
+        <!-- Message -->
+        <p id="pesan1">klikk ini untuk hadiah virtual ini 🎉</p>
+        <div id="kolombaru">
+          <li id="lv1">🎂</li>
+          <li id="lv2">🎁</li>
+          <li id="lv3">🥳</li>
+          <li id="lv4">💖</li>
+        </div>
+
+        <p id="pesan2">Kamu adalah bukti bahwa waktu membuat cahaya semakin indah ✨</p>
+        <p id="pesan3">Kamu tau gaksih sayangnya aku apa yang membuat hari ini begitu sangat istimewa?</p>
+        <p id="pesan4" class="sty2"> Yapsssss yaitu hari ini ulangtahunmu sayangku</p>
+        <p id="pesan5" class="sty2">
+         Hari ini di ulang tahun kamu sayang, aku berharap semoga hari-harimu ke depan dipenuhi hal-hal baik yang membuatmu selalu bahagia, dan dikelilingi sama orang-orang yang baik dari segala penjuru.
+        </p>
+        <p id="pesan6" class="sty2">
+         Ingat ya sayang nya aku, kamu pantas mendapatkan seluruh kebahagiaan di dunia ini. jadi rayakan dengan penuh raya syukur yang sepenuh hati dan nikmati setiap detiknya 🤍
+        </p>
+
+        <!-- Next Button -->
+        <p id="opsL">
+          <button class="next-btn" onclick="closeCard()">
+            💖
+          </button>
+          <span class="hint-text">klik yuks untuk melihat keseruan</span>
+        </p>
+
+        <i class="fa-regular fa-envelope envelope-icon"></i>
+
+      </blockquote>
+    </div>
+
+    <!-- Send / Next Button -->
+<div id="Tombol"><a id="By">&#128140; Nexxt</a></div>
+
+
+    <!-- Rejected Message (if needed) -->
+    <div id="pesanditolak">
+      <img id="stikerditolak" src="https://feeldreams.github.io/weee.gif" />
+      <p id="kataditolak">
+        Oops! kamu tidak bisa skip ini wleee.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Main script remains similar; further changes are made in a.js if needed.
+    const body = document.querySelector("body");
+    const swalst = Swal.mixin({
+      timer: 2300,
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      timerProgressBar: true,
+      imageHeight: 90,
+    });
+    audio = new Audio("" + linkmp3.src);
+    ftganti = 0;
+    fungsi = 0;
+    fungsiAwal = 0;
+    deffotostiker = fotostiker.src;
+    Content.style = "opacity:1;margin-top:16vh";
+    const swals = Swal.mixin({
+      allowOutsideClick: false,
+      cancelButtonColor: "#FF0040",
+      imageHeight: 80,
+    });
+
+    document.getElementById("kadoIn").onclick = function () {
+      if (fungsiAwal == 0) {
+        audio.play();
+        fungsiAwal = 1;
+        kadoIn.style =
+          "transition:all .8s ease;transform:scale(10);opacity:0";
+        wallpaper.style = "transform: scale(1.5);";
+        ket.style = "display:none";
+        setTimeout(initengahan, 300);
+        setTimeout(inipesan, 500);
+      }
+    };
+
+    async function inipesan() {
+      var { value: nama } = await swals.fire({
+        title: "Siapa namamu yang manis itu ganteng?",
+        input: "text",
+      });
+      if (nama && nama.length < 11) {
+        window.nama = nama;
+        vketikhalo = "Selamat ulangtahun sayangnya aku, " + nama + "!";
+        mulainama();
+      } else {
+        await Swal.fire({
+          title: "Nama kamu terlalu indah, tapi ini kepanjangan pisan, singkat aja ish.",
+          text: "Plisss, masukkkan nama kamu yang lebih pendek.",
+          icon: "warning",
+        });
+        inipesan();
+      }
+    }
+
+    var tanya = "hmm gimana kita rayakan ulangtahunmu ini dengan amazinggg?";
+    var opstanya = "Ayuksks kamu pilih yang mana?:";
+    var tompositif = "Gaskennnn mari kita rayakannnn! 🎉";
+    var tomnegatif = "Ahh malas lain kali aja yaa";
+
+    async function pertanyaan() {
+      var { isConfirmed: prtanya } = await swals.fire({
+        title: nama + ", " + tanya,
+        text: "" + opstanya,
+        imageUrl: "" + fotostiker5.src,
+        showCancelButton: true,
+        confirmButtonText: "" + tompositif,
+        cancelButtonText: "" + tomnegatif,
+      });
+      if (prtanya) {
+        pesanwhatsapp = "Yes " + nama + ", yuhuuuu mari mulai keajaiban ulang tahunmu di hari ini ";
+        menuju();
+      } else {
+        pesanwhatsapp = nama + ", eitsss tidak bisa malas untuk liatt keajaiban ulang tahun mu wleeee!";
+        await swalst.fire({
+          title: "" + kataditolak.innerHTML,
+          timer: 2000,
+          imageUrl: "" + stikerditolak.src,
+        });
+        menuju();
+      }
+    }
+  </script>
+  <script src="a.js"></script>
+</body>
+
+</html>
