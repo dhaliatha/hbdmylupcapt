@@ -232,7 +232,7 @@ function typeEffect(){
 }
 /* pindah halaman */
 nextBtn.addEventListener("click", ()=>{
-    window.location.href = "../index1.html";
+    window.location.href = "../index.html";
 });
 
 function launchConfetti(){
